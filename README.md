@@ -65,6 +65,7 @@ Top Ten Processes By Memory Consumption:
 
     uw_diskused
     uw_diskused_perc
+    uw_root_diskused_perc
     uw_cpuused
     uw_tcpused
     uw_udpused
