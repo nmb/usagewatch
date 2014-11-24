@@ -19,6 +19,11 @@ module Usagewatch
     df.split(" ").last.to_f.round(2)
   end
 
+  def self.uw_root_diskused_perc
+    df = `df --total /`
+    df.split(" ").last.to_f.round(2)
+  end
+
   # Show the percentage of CPU used
   def self.uw_cpuused
     @proc0 = File.readlines('/proc/stat').grep(/^cpu /).first.split(" ")
