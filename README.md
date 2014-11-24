@@ -20,6 +20,7 @@ usw = Usagewatch
 
 usw.uw_diskused
 usw.uw_diskused_perc
+usw.uw_root_diskused_perc
 usw.uw_cpuused
 usw.uw_tcpused
 usw.uw_udpused
