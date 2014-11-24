@@ -1,5 +1,9 @@
 License: (MIT) Copyright (C) 2013 usagewatch Author Phil Chen, contributor Ruben Espinosa.
 
+0.0.8 24-11-2014
+====
+* Added disc_root
+
 0.0.7 July 25 2013
 ====
 * Added referring people to usagewatch_ext for OS support other then Linux in the OS detection
