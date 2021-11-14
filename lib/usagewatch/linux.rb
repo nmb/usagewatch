@@ -16,12 +16,17 @@ module Usagewatch
   # Show the percentage of disk used.
   def self.uw_diskused_perc
     df = `df --total`
-    df.split(" ").last.to_f.round(2)
+    parts = df.split(" ")
+    perc = parts.last
+    if perc == "-" # ubuntu adds - for path instead of blank like others.
+      perc = parts[-2]
+    end
+    perc.to_f.round(2)
   end
 
   def self.uw_root_diskused_perc
-    df = `df --total /`
-    df.split(" ").last.to_f.round(2)
+    df = `df --total / | tail -n 1`
+    df.split(" ")[4].sub('%', '').to_i
   end
 
   # Show the percentage of CPU used
@@ -115,11 +120,10 @@ module Usagewatch
       end
     end
 
-    @memstat = @result.split("\n").collect{|x| x.strip}
-    @memtotal = @memstat[0].gsub(/[^0-9]/, "")
-    @memactive = @memstat[5].gsub(/[^0-9]/, "")
-    @memactivecalc = (@memactive.to_f * 100) / @memtotal.to_f
-    @memusagepercentage = @memactivecalc.round
+    arr = @result.split.delete_if{|v| v == "kB"}
+    memhash = Hash[*arr]
+    res = 100 * memhash["Active:"].to_f / memhash["MemTotal:"].to_f
+    res.round
   end
 
   # return hash of top ten proccesses by mem consumption
